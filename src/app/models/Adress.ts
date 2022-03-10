@@ -3,7 +3,9 @@ import {
   PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
+  ManyToOne,
 } from 'typeorm';
+import Person from './Person';
 
 @Entity('adress')
 class Adress {
@@ -14,7 +16,7 @@ class Adress {
   street: string;
 
   @Column()
-  street_number: string;
+  number: string;
 
   @Column()
   district: string;
@@ -27,6 +29,9 @@ class Adress {
 
   @Column()
   zip_code: string;
+
+  @ManyToOne(() => Person, person => person.adress)
+  person: Person;
 
   @CreateDateColumn({ name: 'created_at' })
   created_at: Date;

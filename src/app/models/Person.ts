@@ -3,8 +3,7 @@ import {
   PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
-  ManyToMany,
-  JoinTable,
+  OneToMany,
 } from 'typeorm';
 import Adress from './Adress';
 
@@ -20,10 +19,9 @@ class Person {
   cpf: string;
 
   @Column()
-  bith_date: Date;
+  birth_date: Date;
 
-  @ManyToMany(() => Adress)
-  @JoinTable()
+  @OneToMany(() => Adress, adress => adress.person)
   adress: Adress[];
 
   @CreateDateColumn({ name: 'created_at' })
