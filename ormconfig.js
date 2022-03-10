@@ -10,12 +10,12 @@ module.exports = {
   password: DB_PASS,
   database: DB_NAME,
   entities: [
-    "./src/app/models/"
+    "./src/app/models/**/*.ts"
   ],
   migrations: [
     "./src/database/migrations/**/*.ts"
   ],
   cli: {
-    "migrationsDir": "./src/database/migrations/**/*.ts"
+    migrationsDir: "./src/database/migrations/**/*.ts"
   }
 }
