@@ -7,17 +7,21 @@ import {
   CreateDateColumn,
   ManyToMany,
   JoinTable,
+  OneToOne,
+  JoinColumn,
 } from 'typeorm';
 import bcrypt from 'bcryptjs';
 import Role from './Role';
+import Person from './Person';
 
 @Entity('user')
 class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
-  name: string;
+  @OneToOne(() => Person)
+  @JoinColumn()
+  person_info: Person;
 
   @Column()
   email: string;
