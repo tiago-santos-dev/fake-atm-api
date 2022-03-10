@@ -5,8 +5,11 @@ import {
   BeforeInsert,
   BeforeUpdate,
   CreateDateColumn,
+  ManyToMany,
+  JoinTable,
 } from 'typeorm';
 import bcrypt from 'bcryptjs';
+import Role from './Role';
 
 @Entity('user')
 class User {
@@ -21,6 +24,10 @@ class User {
 
   @Column()
   password: string;
+
+  @ManyToMany(() => Role)
+  @JoinTable()
+  roles: Role[];
 
   @BeforeInsert()
   @BeforeUpdate()
