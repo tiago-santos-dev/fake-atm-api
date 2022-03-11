@@ -17,26 +17,37 @@ class UserController {
       return res.sendStatus(409);
     }
 
-    const adress = adressRepository.create(inputAdress);
-    await adressRepository.save(adress);
+    try {
+      const adress = adressRepository.create(inputAdress);
+      await adressRepository.save(adress);
 
-    const person = personRepository.create({
-      name,
-      cpf,
-      birth_date: new Date(),
-      adress,
-    });
-    await personRepository.save(person);
+      const person = personRepository.create({
+        name,
+        cpf,
+        birth_date: new Date(),
+        adress,
+      });
+      await personRepository.save(person);
 
-    const user = userRepository.create({
-      email,
-      password,
-      person_info: person,
-      roles: [],
-    });
-    await userRepository.save(user);
+      const user = userRepository.create({
+        email,
+        password,
+        person_info: person,
+        roles: [],
+      });
+      await userRepository.save(user);
 
-    return user;
+      const { id, person_info, roles } = user;
+
+      return res.status(201).json({
+        id,
+        email,
+        person_info,
+        roles,
+      });
+    } catch (error) {
+      return res.sendStatus(502);
+    }
   }
 }
 
