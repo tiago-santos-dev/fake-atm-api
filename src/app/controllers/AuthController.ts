@@ -3,6 +3,7 @@ import { getRepository } from 'typeorm';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import User from '../models/User';
+import Role from '../models/Role';
 
 class AuthController {
   async authenticate(req: Request, res: Response) {
@@ -30,6 +31,8 @@ class AuthController {
         user: {
           id: user.id,
           email: user.email,
+          roles: user.roles,
+          person: user.person_info,
         },
         token,
       });

@@ -19,7 +19,7 @@ class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @OneToOne(() => Person)
+  @OneToOne(() => Person, { eager: true })
   @JoinColumn()
   person_info: Person;
 
@@ -29,7 +29,7 @@ class User {
   @Column()
   password: string;
 
-  @ManyToMany(() => Role)
+  @ManyToMany(() => Role, { eager: true })
   @JoinTable()
   roles: Role[];
 
